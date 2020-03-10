@@ -1,0 +1,40 @@
+#include <kipr/botball.h>
+
+void move(float time, char direction){//Time function but move to distance eventually on 2000 speed
+    if(direction == 'f'){
+    	mav(0,2000);
+    	mav(1,2000);
+    	msleep(time*1000);//Time in seconds
+    }
+    else{
+        mav(0,-2000);
+    	mav(1,-2000);
+    	msleep(time*1000);
+    }
+}
+void turn(float time, char direction){//Time function but move to degrees
+    if(direction == 'r'){//Right is r Left is l
+        mav(0,-2000);
+    	mav(1,2000);
+    	msleep(time*1000);//Time in Seconds
+    }
+    else{
+        mav(0,2000);
+    	mav(1,-2000);
+    	msleep(time*1000);
+    }
+}
+
+//make this left hand line follow up ramp
+void ramp(){//Bot starting at bottom of ramp moving up, and turning
+    move(6, 'f');//Forward
+    turn(.5, 'l');//Left
+    move(1, 'b');//Backward
+    move(1.5, 'f');//Forward
+}
+
+int main(){
+    ramp();
+    return 1;
+}
+
