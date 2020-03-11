@@ -48,8 +48,7 @@ void ramp(){//Bot starting at bottom of ramp moving up, and turning
 
 void transition(){
     move(1, 'b');
-    turn(.5, 'l'); 
-    
+    turn(.5, 'l');
 }
 
 int main(){
