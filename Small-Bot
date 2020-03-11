@@ -1,4 +1,4 @@
-#include <kipr/botball.h>
+#include <kipr/wombat.h>
 
 void move(float time, char direction){//Time function but move to distance eventually on 2000 speed
     if(direction == 'f'){
@@ -25,16 +25,36 @@ void turn(float time, char direction){//Time function but move to degrees
     }
 }
 
+void lineFollow(int time){
+    unsigned long startTime = systime();
+    while(digital(0) == 0 && startTime + time > systime()){
+    	if(analog(0) > 2000){
+        	mav(1,1500);
+            mav(0,1000);
+    	}else{
+            mav(0,1500);
+            mav(1,1000);
+        }
+    }
+}
+
 //make this left hand line follow up ramp
 void ramp(){//Bot starting at bottom of ramp moving up, and turning
-    move(6, 'f');//Forward
+    lineFollow(5000)
     turn(.5, 'l');//Left
     move(1, 'b');//Backward
     move(1.5, 'f');//Forward
 }
 
-int main(){
-    ramp();
-    return 1;
+void transition(){
+    move(1, 'b');
+    turn(.5, 'l'); 
+    
 }
 
+int main(){
+    lineFollow(20000);
+    
+    //ramp();
+    return 1;
+}
